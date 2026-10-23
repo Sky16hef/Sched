@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Study &amp; Workout Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-in">
+    <nav class="nav" aria-label="Sections">
+      <a href="#study">STUDY</a>
+      <a href="#workout">WORKOUT</a>
+      <a href="#courses">COURSES</a>
+      <a href="#progress">PROGRESS</a>
+    </nav>
+    <div class="tools">
+      <button class="btn" id="themeBtn" type="button">THEME : LIGHT</button>
+      <button class="btn" id="editBtn" type="button" aria-pressed="false">✎ EDIT</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="storageWarn" class="warn" hidden>
+    Auto-save isn't available in this view, so your checkmarks won't stay after you close the page. Download the file and open it in your browser to make saving work.
+  </div>
+
+  <section class="hero" id="hero">
+    <p class="date" id="dateLbl"></p>
+    <h1 id="title"></h1>
+    <p class="sub" id="subtitle"></p>
+    <div class="meters" id="meters"></div>
+  </section>
+
+  <div class="edit-panel edit-only" id="editPanel">
+    <p>Edit mode is on: you can add and delete tasks, days, and courses, and set an image link for a course. Changes are saved automatically.</p>
+    <button class="btn" type="button" data-act="export">Export backup</button>
+    <label class="btn">Import backup<input type="file" id="importFile" accept="application/json" hidden></label>
+    <button class="btn" type="button" data-act="reset" data-confirm>Reset all progress</button>
+  </div>
+
+  <section class="section" id="study">
+    <div class="sec-h"><h2>Study Schedule</h2><p class="hint" id="studyHint"></p></div>
+    <div class="grid" id="studyGrid"></div>
+    <div id="studyAdd" class="grid-add"></div>
+  </section>
+
+  <section class="section" id="workout">
+    <div class="sec-h"><h2>Workout Plans</h2><p class="hint" id="workoutHint"></p></div>
+    <div class="grid" id="workoutGrid"></div>
+    <div id="workoutAdd" class="grid-add"></div>
+  </section>
+
+  <section class="section" id="courses">
+    <div class="sec-h"><h2>Courses</h2><p class="hint">Checkmarks here stay until you remove them yourself.</p></div>
+    <div class="grid" id="coursesGrid"></div>
+    <div id="coursesAdd" class="grid-add"></div>
+  </section>
+
+  <section class="section" id="progress">
+    <div class="sec-h"><h2>Progress</h2><p class="hint">Calculated from the tasks you check off and the level you log.</p></div>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="level-box">
+      <label for="lvl">Your level today (self-rating from 1 to 10)</label>
+      <div class="lvl-row">
+        <input id="lvl" type="range" min="1" max="10" step="1" value="5">
+        <output id="lvlOut" for="lvl">5</output>
+        <button class="btn primary" id="lvlSave" type="button">Log level</button>
+      </div>
+      <p class="hint" id="lvlMsg" role="status"></p>
+    </div>
+
+    <div class="chart-wrap">
+      <div class="chart-h">
+        <div class="legend">
+          <span><i class="sw"></i>Tasks completed (left axis)</span>
+          <span><i class="sw ln"></i>Level out of 10 (right axis)</span>
+        </div>
+        <div class="seg" role="group" aria-label="Time range">
+          <button type="button" data-range="7" aria-pressed="false">7 days</button>
+          <button type="button" data-range="14" aria-pressed="true">14 days</button>
+          <button type="button" data-range="30" aria-pressed="false">30 days</button>
+        </div>
+      </div>
+      <svg id="chart" viewBox="0 0 640 280" role="img" aria-label="Chart of tasks completed and your level, day by day"></svg>
+      <p class="hint" id="chartEmpty" hidden>Check off your first task and log your level, and your progress will show up here.</p>
+    </div>
+  </section>
+</main>
+<script src="main.js"></script>
+</body>
+</html>
